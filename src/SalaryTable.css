@@ -1,0 +1,84 @@
+/* SalaryTable Styles */
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.salary-table {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+.salary-table th,
+.salary-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.salary-table th {
+  background-color: #f4f4f4;
+}
+
+.salary-table input[type="month"] {
+  /* Your custom styles */
+  width: 100%;
+  padding: 0.5em;
+  box-sizing: border-box;
+}
+
+/* Uniform styles for all input fields within the table */
+.salary-table input[type="text"],
+.salary-table input[type="text"],
+.salary-table select {
+  width: 100%; /* Make input fields take up the full cell width */
+  padding: 8px; /* Adjust padding as needed for visual consistency */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Button Styles */
+.salary-table .remove-btn {
+  background-color: #d32f47; /* Red */
+  color: white;
+}
+
+.salary-table .remove-btn:hover {
+  background-color: #ff5230; /* Darker Red for hover effect */
+}
+
+.add-remove-btns {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.add-remove-btns .add-btn {
+  background-color: #063851; /* Dark Blue */
+  color: white;
+}
+
+.add-remove-btns .add-btn:hover {
+  background-color: #e6ac00; /* Darker Amber for hover effect */
+}
+
+.add-remove-btns .calculate-btn {
+  background-color: #063851; /* Dark Blue */
+  color: white;
+}
+
+.add-remove-btns .calculate-btn:hover {
+  background-color: #45a049; /* Darker Green for hover effect */
+}
+
+/* Additional styles if needed */
+
+/* If it's a header tag */
+header {
+  text-align: center;
+}
+
+/* Or if you have a specific class for the container of "Payroll Application" */
+.your-header-class {
+  text-align: center;
+}
