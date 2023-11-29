@@ -98,9 +98,9 @@ function SalaryTable() {
         <thead>
           <tr>
             <th>Month</th>
-            <th>StaffName</th>
+            <th>Staff Name</th>
             <th>StaffCategory</th>
-            <th>GrossPay</th>
+            <th>Gross Pay</th>
             <th>LoanDeduction</th>
             <th>V.A.T(5%)</th>
             <th>W.H.T(10%)</th>
@@ -124,7 +124,7 @@ function SalaryTable() {
               <td>
                 <input
                   data-testid="Employee Name"
-                  type="text"
+                  type="textarea"
                   value={employee.name}
                   onChange={(e) => handleChange(index, "name", e.target.value)}
                 />
@@ -147,7 +147,7 @@ function SalaryTable() {
                 <input
                   className="input-field" // Add this class to your input
                   data-testid="Gross Pay"
-                  type="number"
+                  type="textarea"
                   value={employee.grossPay}
                   onChange={(e) =>
                     handleChange(index, "grossPay", e.target.value)
@@ -178,7 +178,7 @@ function SalaryTable() {
               <td>{employee.netSalary}</td>
               <td>
                 <input
-                  type="number"
+                  type="textarea"
                   data-testid="Prorated Days"
                   placeholder="Prorated Days"
                   value={employee.proratedDays}

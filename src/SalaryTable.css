@@ -2,6 +2,9 @@
 
 body {
   font-family: "Roboto", sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 20px;
 }
 
 .salary-table {
@@ -20,13 +23,16 @@ body {
 
 .salary-table th {
   background-color: #f4f4f4;
+  font-size: 12px;
+  color: #063851;
 }
 
 .salary-table input[type="month"] {
-  /* Your custom styles */
-  width: 100%;
-  padding: 0.5em;
-  box-sizing: border-box;
+  width: 100%; /* Full width */
+  padding: 10px; /* Some padding */
+  border: 1px solid #ccc; /* A more subtle border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Border and padding included in width */
 }
 
 /* Uniform styles for all input fields within the table */
@@ -76,6 +82,8 @@ body {
 /* If it's a header tag */
 header {
   text-align: center;
+  font-size: 12px;
+  color: #063851;
 }
 
 /* Or if you have a specific class for the container of "Payroll Application" */
