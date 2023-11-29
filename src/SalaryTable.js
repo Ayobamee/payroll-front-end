@@ -18,6 +18,7 @@ function SalaryTable() {
   const [employees, setEmployees] = useState([initialEmployeeState]);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState({});
 
   const handleAddRow = () => {
     setEmployees([...employees, { ...initialEmployeeState }]);
@@ -33,6 +34,21 @@ function SalaryTable() {
     const newEmployees = [...employees];
     newEmployees[index][field] = value;
     setEmployees(newEmployees);
+  };
+
+  const toggleDropdown = (index) => {
+    setDropdownOpen((prevState) => ({
+      ...prevState,
+      [index]: !prevState[index],
+    }));
+  };
+
+  const selectOption = (index, value) => {
+    handleChange(index, "employeeType", value);
+    setDropdownOpen((prevState) => ({
+      ...prevState,
+      [index]: false,
+    }));
   };
 
   const calculateNetSalary = (employee) => {
@@ -130,18 +146,37 @@ function SalaryTable() {
                 />
               </td>
               <td>
-                <select
-                  className="input-field"
-                  data-testid="Employee Type"
-                  value={employee.employeeType}
-                  onChange={(e) =>
-                    handleChange(index, "employeeType", e.target.value)
-                  }
-                >
-                  <option value="Founder">Founder</option>
-                  <option value="Permanent">Permanent</option>
-                  <option value="Contract">Contract</option>
-                </select>
+                <div className="custom-dropdown">
+                  <button
+                    className="drop-btn"
+                    onClick={() => toggleDropdown(index)}
+                    data-testid="Employee Type"
+                  >
+                    {employee.employeeType || "Select Employee Type"}
+                  </button>
+                  {dropdownOpen[index] && (
+                    <div className="dropdown-content">
+                      <a
+                        href="#!"
+                        onClick={() => selectOption(index, "Founder")}
+                      >
+                        Founder
+                      </a>
+                      <a
+                        href="#!"
+                        onClick={() => selectOption(index, "Permanent")}
+                      >
+                        Permanent
+                      </a>
+                      <a
+                        href="#!"
+                        onClick={() => selectOption(index, "Contract")}
+                      >
+                        Contract
+                      </a>
+                    </div>
+                  )}
+                </div>
               </td>
               <td>
                 <input
