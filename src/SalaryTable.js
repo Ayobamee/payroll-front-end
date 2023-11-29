@@ -1,24 +1,28 @@
+
+
 import React, { useState } from "react";
 import Modal from "./Modal"; // Ensure this component is created
+import EmployeeRow from "./EmployeeRow"; // Import the EmployeeRow component
 import "./SalaryTable.css"; // Ensure the CSS path is correct
 
 function SalaryTable() {
   const initialEmployeeState = {
+    // ... initial state properties ...
     month: "",
     name: "",
     employeeType: "Founder",
     grossPay: "",
     loanRepayment: "",
     netSalary: "",
-    wht: "", // Withholding Tax
-    proratedDays: "", // Prorated Days (optional)
-    proratedPay: "", // Prorated Pay (calculated)
+    wht: "",
+    proratedDays: "",
+    proratedPay: "",
     error: "",
   };
+
   const [employees, setEmployees] = useState([initialEmployeeState]);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  const [dropdownOpen, setDropdownOpen] = useState({});
 
   const handleAddRow = () => {
     setEmployees([...employees, { ...initialEmployeeState }]);
@@ -36,22 +40,8 @@ function SalaryTable() {
     setEmployees(newEmployees);
   };
 
-  const toggleDropdown = (index) => {
-    setDropdownOpen((prevState) => ({
-      ...prevState,
-      [index]: !prevState[index],
-    }));
-  };
-
-  const selectOption = (index, value) => {
-    handleChange(index, "employeeType", value);
-    setDropdownOpen((prevState) => ({
-      ...prevState,
-      [index]: false,
-    }));
-  };
-
   const calculateNetSalary = (employee) => {
+    // ... implementation ...
     const grossPay = parseFloat(employee.grossPay || 0);
     const loanRepayment = parseFloat(employee.loanRepayment || 0);
     const proratedDays = parseInt(employee.proratedDays || 0, 10);
@@ -74,6 +64,7 @@ function SalaryTable() {
   };
 
   const handleSubmit = () => {
+    // ... implementation ...
     let hasError = false;
     let errorMessage = "";
 
@@ -112,12 +103,13 @@ function SalaryTable() {
     <div>
       <table className="salary-table">
         <thead>
+          {/* Table headers */}
           <tr>
             <th>Month</th>
             <th>Staff Name</th>
             <th>StaffCategory</th>
             <th>Gross Pay</th>
-            <th>LoanDeduction</th>
+            <th>Loans</th>
             <th>V.A.T(5%)</th>
             <th>W.H.T(10%)</th>
             <th>NetPay</th>
@@ -128,132 +120,36 @@ function SalaryTable() {
         </thead>
         <tbody>
           {employees.map((employee, index) => (
-            <tr key={index}>
-              <td>
-                <input
-                  data-testid="Month"
-                  type="month"
-                  value={employee.month}
-                  onChange={(e) => handleChange(index, "month", e.target.value)}
-                />
-              </td>
-              <td>
-                <input
-                  data-testid="Employee Name"
-                  type="textarea"
-                  value={employee.name}
-                  onChange={(e) => handleChange(index, "name", e.target.value)}
-                />
-              </td>
-              <td>
-                <div className="custom-dropdown">
-                  <button
-                    className="drop-btn"
-                    onClick={() => toggleDropdown(index)}
-                    data-testid="Employee Type"
-                  >
-                    {employee.employeeType || "Select Employee Type"}
-                  </button>
-                  {dropdownOpen[index] && (
-                    <div className="dropdown-content">
-                      <a
-                        href="#!"
-                        onClick={() => selectOption(index, "Founder")}
-                      >
-                        Founder
-                      </a>
-                      <a
-                        href="#!"
-                        onClick={() => selectOption(index, "Permanent")}
-                      >
-                        Permanent
-                      </a>
-                      <a
-                        href="#!"
-                        onClick={() => selectOption(index, "Contract")}
-                      >
-                        Contract
-                      </a>
-                    </div>
-                  )}
-                </div>
-              </td>
-              <td>
-                <input
-                  className="input-field" // Add this class to your input
-                  data-testid="Gross Pay"
-                  type="textarea"
-                  value={employee.grossPay}
-                  onChange={(e) =>
-                    handleChange(index, "grossPay", e.target.value)
-                  }
-                />
-              </td>
-              <td>
-                <input
-                  className="input-field" // Ensure this class is also here
-                  data-testid="Loan Deduction"
-                  type="number"
-                  value={employee.loanRepayment}
-                  onChange={(e) =>
-                    handleChange(index, "loanRepayment", e.target.value)
-                  }
-                />
-              </td>
-              <td>
-                {employee.employeeType !== "Contract" && employee.grossPay
-                  ? (parseFloat(employee.grossPay) * 0.05).toFixed(2)
-                  : ""}
-              </td>
-              <td>
-                {employee.employeeType === "Contract" && employee.grossPay
-                  ? (parseFloat(employee.grossPay) * 0.1).toFixed(2)
-                  : ""}
-              </td>
-              <td>{employee.netSalary}</td>
-              <td>
-                <input
-                  type="textarea"
-                  data-testid="Prorated Days"
-                  placeholder="Prorated Days"
-                  value={employee.proratedDays}
-                  onChange={(e) =>
-                    handleChange(index, "proratedDays", e.target.value)
-                  }
-                />
-              </td>
-              <td>{employee.proratedPay}</td>
-              <td>
-                <button
-                  className="remove-btn"
-                  data-testid="Remove-btn"
-                  onClick={() => handleRemoveRow(index)}
-                >
-                  Remove
-                </button>
-              </td>
-            </tr>
+            <EmployeeRow
+              key={index}
+              employee={employee}
+              index={index}
+              handleChange={handleChange}
+              handleRemoveRow={handleRemoveRow}
+              calculateNetSalary={calculateNetSalary}
+            />
           ))}
         </tbody>
       </table>
       <div className="add-remove-btns">
         <button
-          className="add-btn"
-          data-testid="Add Employee"
+          className="add-employee-btn"
+          data-testid="add-employee"
           onClick={handleAddRow}
         >
           Add Employee
         </button>
+
         <button
-          className="calculate-btn"
-          data-testid="Calculate Salaries"
+          className="calculate-salaries-btn"
+          data-testid="calculate-salaries"
           onClick={handleSubmit}
         >
-          Calculate Salaries
+          Calculate Salary
         </button>
         <button
-          className="clear-btn"
-          data-testid="Clear All"
+          className="clear-all-btn"
+          data-testid="clear-all"
           onClick={handleClearAll}
         >
           Clear All
