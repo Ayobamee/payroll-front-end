@@ -58,11 +58,11 @@ function SalaryTable() {
     }
 
     let netSalary = grossPay - taxDeduction - wht - loanRepayment;
-    let proratedPay = proratedDays ? netSalary / proratedDays : netSalary;
+    let proratedPay = employee.proratedDays > 0 ? (netSalary / employee.proratedDays).toFixed(2) : "";
 
     return {
       netSalary: netSalary.toFixed(2),
-      proratedPay: proratedPay.toFixed(2),
+      proratedPay: proratedPay,
     };
   };
 

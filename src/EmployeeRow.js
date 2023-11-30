@@ -70,7 +70,7 @@ function EmployeeRow({
           onChange={(e) => handleChange(index, "proratedDays", e.target.value)}
         />
       </td>
-      <td>{employee.proratedPay}</td>
+      <td>{employee.proratedPay ? employee.proratedPay : ""}</td>
       <td>
         <button
           className="remove-btn"
