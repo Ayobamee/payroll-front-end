@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import Modal from "./Modal"; // Ensure this component is created
 import EmployeeRow from "./EmployeeRow"; // Import the EmployeeRow component
@@ -23,8 +21,10 @@ function SalaryTable() {
   const [employees, setEmployees] = useState([initialEmployeeState]);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [isTableVisible, setIsTableVisible] = useState(false);
 
   const handleAddRow = () => {
+    setIsTableVisible(true);
     setEmployees([...employees, { ...initialEmployeeState }]);
   };
 
@@ -32,6 +32,9 @@ function SalaryTable() {
     const rows = [...employees];
     rows.splice(index, 1);
     setEmployees(rows);
+    if (rows.length === 0) {
+      setIsTableVisible(false);
+    }
   };
 
   const handleChange = (index, field, value) => {
@@ -97,40 +100,43 @@ function SalaryTable() {
 
   const handleClearAll = () => {
     setEmployees([initialEmployeeState]);
+    setIsTableVisible(false);
   };
 
   return (
     <div>
-      <table className="salary-table">
-        <thead>
-          {/* Table headers */}
-          <tr>
-            <th>Month</th>
-            <th>Staff Name</th>
-            <th>StaffCategory</th>
-            <th>Gross Pay</th>
-            <th>Loans</th>
-            <th>V.A.T(5%)</th>
-            <th>W.H.T(10%)</th>
-            <th>NetPay</th>
-            <th>ProratedDays</th>
-            <th>ProratedPay</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employees.map((employee, index) => (
-            <EmployeeRow
-              key={index}
-              employee={employee}
-              index={index}
-              handleChange={handleChange}
-              handleRemoveRow={handleRemoveRow}
-              calculateNetSalary={calculateNetSalary}
-            />
-          ))}
-        </tbody>
-      </table>
+      {isTableVisible && (
+        <table className="salary-table">
+          <thead>
+            {/* Table headers */}
+            <tr>
+              <th>Month</th>
+              <th>Staff Name</th>
+              <th>StaffCategory</th>
+              <th>Gross Pay</th>
+              <th>Loans</th>
+              <th>V.A.T(5%)</th>
+              <th>W.H.T(10%)</th>
+              <th>NetPay</th>
+              <th>ProratedDays</th>
+              <th>ProratedPay</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {employees.map((employee, index) => (
+              <EmployeeRow
+                key={index}
+                employee={employee}
+                index={index}
+                handleChange={handleChange}
+                handleRemoveRow={handleRemoveRow}
+                calculateNetSalary={calculateNetSalary}
+              />
+            ))}
+          </tbody>
+        </table>
+      )}
       <div className="add-remove-btns">
         <button
           className="add-employee-btn"
