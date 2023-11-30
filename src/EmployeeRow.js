@@ -59,7 +59,7 @@ function EmployeeRow({
           ? (parseFloat(employee.grossPay) * 0.05).toFixed(2)
           : ""}
       </td>
-      <td>{wht}</td>
+      <td>{employee.wht}</td>
       <td>{netSalary}</td>
       <td>
         <input

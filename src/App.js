@@ -1,6 +1,7 @@
 import React from "react";
 import SalaryTable from "./SalaryTable"; // Make sure the path matches the location of your component
 
+
 function App() {
   return (
     <div className="App">
