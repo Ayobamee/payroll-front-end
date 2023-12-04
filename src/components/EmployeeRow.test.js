@@ -3,16 +3,26 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import EmployeeRow from "./EmployeeRow";
 
-test("renders employee name", () => {
+test("renders employee name in input", () => {
   // Create the mock data to match what EmployeeRow expects
   const mockEmployee = {
-    // ... other properties that EmployeeRow might be expecting
     name: "John Doe",
+    // ... other properties that EmployeeRow might be expecting
   };
 
-  // Render the component with mock data
-  render(<EmployeeRow employee={mockEmployee} />);
+  // Mock the calculateNetSalary function
+  const mockCalculateNetSalary = jest
+    .fn()
+    .mockReturnValue({ netSalary: "5000", wht: "500" });
 
-  // Assert that the component correctly displays the name
-  expect(screen.getByText("John Doe")).toBeInTheDocument();
+  // Render the component with mock data
+  render(
+    <EmployeeRow
+      employee={mockEmployee}
+      calculateNetSalary={mockCalculateNetSalary}
+    />
+  );
+
+  // Assert that the input element correctly displays the name
+  expect(screen.getByDisplayValue("John Doe")).toBeInTheDocument();
 });
