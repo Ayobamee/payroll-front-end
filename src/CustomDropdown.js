@@ -12,7 +12,11 @@ function CustomDropdown({ employeeType, onSelect }) {
 
   return (
     <div className="custom-dropdown">
-      <button className="drop-btn" onClick={toggleDropdown}>
+      <button
+        className="drop-btn"
+        data-testid="dropdown"
+        onClick={toggleDropdown}
+      >
         {employeeType || "Select Employee Type"}
       </button>
       {isOpen && (

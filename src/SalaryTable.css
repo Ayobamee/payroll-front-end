@@ -18,7 +18,7 @@ body {
 .salary-table td {
   border: 1px solid #ddd;
   padding: 8px;
-   color: #063851;
+  color: #063851;
   text-align: left;
 }
 
@@ -184,4 +184,15 @@ header {
 
 .clear-all:hover {
   background-color: #45a049; /* Slightly darker green when hovered */
+}
+
+.header {
+  display: flex;
+  align-items: center; /* Vertically align the image and text */
+}
+
+.logo {
+  width: 50px; /* Adjust as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Space between the logo and the text */
 }
