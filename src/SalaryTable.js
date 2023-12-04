@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "./Modal"; // Ensure this component is created
-import EmployeeRow from "./EmployeeRow"; // Import the EmployeeRow component
+import EmployeeRow from "./components/EmployeeRow"; // Import the EmployeeRow component
 import "./SalaryTable.css"; // Ensure the CSS path is correct
 
 function SalaryTable() {
